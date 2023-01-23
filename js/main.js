@@ -16,7 +16,8 @@ function getComputerChoice() {
 
 function playRound(playerSelection,computerSelection) {
   let matchResults;
-  
+  playerSelection = validateUserChoice(playerSelection);
+
   console.log("You choose: "+playerSelection);
   console.log("PC choose: "+computerSelection);
 
@@ -51,7 +52,12 @@ function playRound(playerSelection,computerSelection) {
   return matchResults;
 }
 
-let playerSelection = "Rock";
+function validateUserChoice(choice) {
+  choice = choice.toLowerCase();
+  return (choice.substring(0,1)).toUpperCase() + choice.substring(1);
+}
+
+let playerSelection = "PAPER";
 let computerSelection = getComputerChoice();
 
 console.log(playRound(playerSelection, computerSelection));
