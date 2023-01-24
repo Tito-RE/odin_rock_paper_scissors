@@ -65,6 +65,8 @@ function validateUserChoice(choice) {
 }
 
 function game() {
+  let playerScore = 0;
+  let computerScore = 0;
   let playerSelection;
   let computerSelection; 
 
@@ -73,6 +75,22 @@ function game() {
     playerSelection = prompt("What's your choice?");
     computerSelection = getComputerChoice();
     roundResult = playRound(playerSelection, computerSelection);
+    if (roundResult === 1){
+        playerScore++;
+    }
+    if (roundResult === 2){
+        computerScore++;
+    }
+    console.log("Player: " + playerScore + " | " + "Computer: " + computerScore);
+  }
+
+  console.log("-------------- Match Result: ----------------");
+  if (playerScore === computerScore) {
+    console.log("Tie! Nobody Win the Match");
+  } else if (playerScore > computerScore) {
+    console.log("You Win the Match!");
+  } else {
+    console.log("You Lose the Match!");
   }
 }
 
