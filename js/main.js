@@ -15,41 +15,48 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection,computerSelection) {
-  let matchResults;
+  let roundResult;
   playerSelection = validateUserChoice(playerSelection);
 
   console.log("You choose: "+playerSelection);
   console.log("PC choose: "+computerSelection);
 
   if (playerSelection === computerSelection) {
-    matchResults = "Tie! Nobody Wins";
+    console.log("Tie! Nobody Wins");
+    roundResult = 0;
   }
 
   if (playerSelection === "Rock" && computerSelection === "Paper") {
-    matchResults = "You Lose! Paper beats Rock";
+    console.log("You Lose! Paper beats Rock");
+    roundResult = 2;
   } 
 
   if (playerSelection === "Rock" && computerSelection === "Scissors") {
-    matchResults = "You Win! Rock beats Scissors";
+    console.log("You Win! Rock beats Scissors");
+    roundResult = 1;
   }
 
   if (playerSelection === "Paper" && computerSelection === "Rock") {
-    matchResults = "You Win! Paper beats Rock";
+    console.log("You Win! Paper beats Rock");
+    roundResult = 1;
   }
 
   if (playerSelection === "Paper" && computerSelection === "Scissors") {
-    matchResults = "You Lose! Scissors beats Paper";
+    console.log("You Lose! Scissors beats Paper");
+    roundResult = 2;
   }
 
   if (playerSelection === "Scissors" && computerSelection === "Rock") {
-    matchResults = "You Lose! Rock beats Scissors";
+    console.log("You Lose! Rock beats Scissors");
+    roundResult = 2;
   }
 
   if (playerSelection === "Scissors" && computerSelection === "Paper") {
-    matchResults = "You Win! Scissors beats Paper";
+    console.log("You Win! Scissors beats Paper");
+    roundResult = 1;
   }
 
-  return matchResults;
+  return roundResult;
 }
 
 function validateUserChoice(choice) {
@@ -57,7 +64,16 @@ function validateUserChoice(choice) {
   return (choice.substring(0,1)).toUpperCase() + choice.substring(1);
 }
 
-let playerSelection = "PAPER";
-let computerSelection = getComputerChoice();
+function game() {
+  let playerSelection;
+  let computerSelection; 
 
-console.log(playRound(playerSelection, computerSelection));
+  for (let i = 0; i < 5; i++) {
+    console.log("---------- "+ "Round: " + (i + 1) + " ----------");
+    playerSelection = prompt("What's your choice?");
+    computerSelection = getComputerChoice();
+    roundResult = playRound(playerSelection, computerSelection);
+  }
+}
+
+game();
