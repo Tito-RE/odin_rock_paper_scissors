@@ -14,12 +14,18 @@ function getComputerChoice() {
   return choice;
 }
 
+function displayText(text) {
+  div = document.createElement('div');
+  div.textContent = text;
+  (document.querySelector('#results')).appendChild(div);
+}
+
 function playRound(playerSelection,computerSelection) {
   let roundResult;
   playerSelection = validateUserChoice(playerSelection);
 
-  console.log("You choose: "+playerSelection);
-  console.log("PC choose: "+computerSelection);
+  displayText('You choose: '+playerSelection);
+  displayText('PC choose: '+computerSelection);
 
   if (playerSelection === computerSelection) {
     console.log("Tie! Nobody Wins");
@@ -64,17 +70,16 @@ function validateUserChoice(choice) {
   return (choice.substring(0,1)).toUpperCase() + choice.substring(1);
 }
 
-function game() {
+function game(playerSelection) {
   let playerScore = 0;
   let computerScore = 0;
-  let playerSelection;
-  let computerSelection; 
+  //let playerSelection;
+  //let computerSelection; 
 
-  for (let i = 0; i < 5; i++) {
-    console.log("---------- "+ "Round: " + (i + 1) + " ----------");
-    playerSelection = prompt("What's your choice?");
-    computerSelection = getComputerChoice();
-    roundResult = playRound(playerSelection, computerSelection);
+  //for (let i = 0; i < 5; i++) {
+    //console.log("---------- "+ "Round: " + (i + 1) + " ----------");
+    //playerSelection = prompt("What's your choice?");
+    roundResult = playRound(playerSelection, getComputerChoice());
     if (roundResult === 1){
         playerScore++;
     }
@@ -82,7 +87,7 @@ function game() {
         computerScore++;
     }
     console.log("Player: " + playerScore + " | " + "Computer: " + computerScore);
-  }
+  //}
 
   console.log("-------------- Match Result: ----------------");
   if (playerScore === computerScore) {
@@ -94,4 +99,11 @@ function game() {
   }
 }
 
-game();
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    playRound(button.id, getComputerChoice());
+  });
+});
+
+
